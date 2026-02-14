@@ -12,9 +12,9 @@
 }
 
 body {
-    background: linear-gradient(135deg, #1d1d27, #2b2b45);
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
 }
@@ -41,7 +41,7 @@ body {
 .bar {
     width: 0%;
     height: 100%;
-    background: #ff4081;
+    background: lime;
     animation: load 3s forwards;
 }
 
@@ -66,34 +66,29 @@ body {
 }
 
 .slide:nth-child(odd) {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    background: linear-gradient(135deg, #e94560, #ff6b6b);
 }
 
 .slide:nth-child(even) {
-    background: linear-gradient(135deg, #a84c65, #b06377);
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
 }
 
 .slide img {
-    max-width: 80%;
+    max-width: 85%;
     max-height: 50vh;
     border-radius: 20px;
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
     margin-bottom: 30px;
-    transition: transform 0.3s;
-}
-
-.slide img:hover {
-    transform: scale(1.05);
 }
 
 .slide h1 {
-    font-size: 2.7em;
+    font-size: 2.5em;
     margin-bottom: 15px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
 }
 
 .slide .joke {
-    font-size: 1.5em;
+    font-size: 1.4em;
     max-width: 600px;
     line-height: 1.6;
     margin-bottom: 20px;
@@ -101,7 +96,7 @@ body {
 }
 
 .slide .励志-quote {
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-style: italic;
     opacity: 0.9;
     max-width: 500px;
@@ -121,23 +116,35 @@ body {
     50% { transform: translateY(-20px); }
 }
 
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.heartbeat {
+    animation: heartbeat 1s infinite;
+    display: inline-block;
+}
+
+/* SCROLL INDICATOR */
 .scroll-hint {
     position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1em;
+    font-size: 0.9em;
     opacity: 0.7;
     animation: fadeUpDown 2s infinite;
 }
 
 @keyframes fadeUpDown {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-10px); }
 }
 
+/* SLIDE FINALE */
 .final-slide {
-    background: linear-gradient(135deg, #ff9a9e, #fecfef);
+    background: linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
     color: #333;
 }
 
@@ -155,7 +162,9 @@ body {
 }
 
 @keyframes fall {
-    to { transform: translateY(100vh) rotate(720deg); }
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
 }
 
 /* NAVIGATION DOTS */
@@ -184,9 +193,20 @@ body {
     transform: scale(1.3);
 }
 
+/* GOT YOU */
+.got-you {
+    font-size: 3em;
+    animation: blink 0.5s infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
 @media (max-width: 600px) {
-    .slide h1 { font-size: 2em; }
-    .slide .joke { font-size: 1.2em; }
+    .slide h1 { font-size: 1.8em; }
+    .slide .joke { font-size: 1.1em; }
     .emoji-big { font-size: 3em; }
     .nav-dots { right: 10px; }
 }
@@ -209,16 +229,17 @@ body {
 
 <!-- SLIDES DE BLAGUES -->
 <div id="slides">
-
+    
     <!-- SLIDE 1 - GOT YOU -->
     <div class="slide">
         <div class="got-you">😂 GOT YOU 😂</div>
-        <img id="randomImage" src="https://example.com/image1.jpg" alt="Image humoristique 1">
+        <img id="randomImage" src="">
         <h1>Pas de Wi-Fi... mais des blagues !</h1>
         <p class="joke">Bienvenue dans ton cadeau de Saint-Valentin 💝</p>
         <div class="scroll-hint">👇 Scroll pour continuer 👇</div>
     </div>
 
+    <!-- SLIDE 2 -->
     <div class="slide">
         <div class="emoji-big">💔</div>
         <h1>Être célibataire à la Saint-Valentin...</h1>
@@ -227,6 +248,7 @@ body {
         <div class="scroll-hint">👇</div>
     </div>
 
+    <!-- SLIDE 3 -->
     <div class="slide">
         <div class="emoji-big">🍫</div>
         <h1>Le 15 février...</h1>
@@ -235,6 +257,7 @@ body {
         <div class="scroll-hint">👇</div>
     </div>
 
+    <!-- SLIDE 4 -->
     <div class="slide">
         <div class="emoji-big">📱</div>
         <h1>Quand tu scrolles Instagram le 14 février...</h1>
@@ -243,11 +266,40 @@ body {
         <div class="scroll-hint">👇</div>
     </div>
 
+    <!-- SLIDE 5 -->
+    <div class="slide">
+        <div class="emoji-big">💑</div>
+        <h1>Les couples disent : "On se complète"</h1>
+        <p class="joke">Toi tu dis : "Je me suffit à moi-même... et à mon compte Netflix, Spotify, et mon frigo bien rempli." 😌</p>
+        <p class="励志-quote">💪 "La solitude n'est pas un défaut. C'est une salle d'attente VIP pour quelqu'un d'exceptionnel."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+        <div class="emoji-big">💸</div>
+        <h1>Économies de la Saint-Valentin :</h1>
+        <p class="joke">Fleurs : 0€ | Restaurant : 0€ | Cadeau : 0€ | Ne pas partager ton lit : INESTIMABLE 💰</p>
+        <p class="励志-quote">💪 "Chaque jour célibataire est un jour de plus à investir en toi-même. Tu es ton meilleur placement !"</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+        <div class="emoji-big">🛏️</div>
+        <h1>Avantages d'être célibataire :</h1>
+        <p class="joke">✅ Tout le lit pour toi<br>✅ La télécommande est TOUJOURS à toi<br>✅ Manger des chips à 3h du mat sans jugement<br>✅ Tes exs te regardent d'en bas 👀</p>
+        <p class="励志-quote">💪 "Tu n'es pas seul(e). Tu es disponible. Et ça, c'est une force."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 8 - FINALE -->
     <div class="slide final-slide">
         <div class="emoji-big"><span class="heartbeat">❤️</span></div>
         <h1>Message sérieux maintenant...</h1>
         <p class="joke">Tu es incroyable tel(le) que tu es. L'amour viendra quand il viendra. En attendant, aime-toi toi-même, c'est le seul amour garanti à 100% ! 💖</p>
         <p class="励志-quote">💪 "Le plus grand amour de ta vie, c'est toi. Les autres ne sont que des bonus."</p>
+        <br><br>
         <h1 style="font-size: 1.5em;">Joyeuse Saint-Valentin ! 🎉</h1>
         <p style="margin-top: 20px; opacity: 0.7;">— Avec amour, de la part de celui/celle qui t'a piégé(e) 😂</p>
     </div>
@@ -262,10 +314,10 @@ setTimeout(() => {
 
     // Image aléatoire
     const images = [
-        "https://example.com/image1.jpg",
-        "https://example.com/image2.jpg",
-        "https://example.com/image3.jpg",
-        "https://example.com/image4.jpg"
+        "images/photo1.jpg",
+        "images/photo2.jpg",
+        "images/photo3.jpg",
+        "images/photo4.jpg"
     ];
     const randomIndex = Math.floor(Math.random() * images.length);
     document.getElementById("randomImage").src = images[randomIndex];
@@ -289,6 +341,7 @@ function createConfetti() {
             confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
             confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
             document.body.appendChild(confetti);
+            
             setTimeout(() => confetti.remove(), 5000);
         }, i * 100);
     }
@@ -298,7 +351,7 @@ function createConfetti() {
 function createNavDots() {
     const slides = document.querySelectorAll('.slide');
     const navContainer = document.getElementById('navDots');
-
+    
     slides.forEach((_, index) => {
         const dot = document.createElement('div');
         dot.className = 'nav-dot' + (index === 0 ? ' active' : '');
