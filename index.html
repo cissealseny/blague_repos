@@ -1,51 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Surprise 😂</title>
-    <style>
-        body {
-            margin: 0;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        img {
-            max-width: 90%;
-            border-radius: 20px;
-            box-shadow: 0 0 30px red;
-        }
-        h1 {
-            margin-top: 20px;
-            font-size: 28px;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Wi-Fi Gratuit</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
+}
+
+#prank {
+    display: none;
+}
+
+img {
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 0 30px red;
+}
+
+h1 {
+    margin-top: 20px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* barre de chargement */
+.loader {
+    width: 250px;
+    height: 10px;
+    background: #333;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.bar {
+    width: 0%;
+    height: 100%;
+    background: lime;
+    animation: load 3s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+</style>
 </head>
+
 <body>
 
-    <img id="randomImage" src="" alt="Surprise">
+<!-- ÉCRAN FAUX WIFI -->
+<div id="loading">
+    <h2>📶 Connexion au Wi-Fi gratuit…</h2>
+    <p>Veuillez patienter</p>
+    <div class="loader">
+        <div class="bar"></div>
+    </div>
+</div>
+
+<!-- ÉCRAN BLAGUE -->
+<div id="prank">
+    <img id="randomImage" src="">
     <h1>😂 GOT YOU 😂</h1>
+</div>
 
-    <script>
-        const images = [
-            "images/photo1.jpg",
-            "images/photo2.jpg",
-            "images/photo3.jpg",
-            "images/photo4.jpg"
-        ];
+<script>
+setTimeout(() => {
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("prank").style.display = "block";
 
-        const randomIndex = Math.floor(Math.random() * images.length);
-        document.getElementById("randomImage").src = images[randomIndex];
-    </script>
+    const images = [
+        "images/photo1.jpg",
+        "images/photo2.jpg",
+        "images/photo3.jpg",
+        "images/photo4.jpg"
+    ];
+
+    const randomIndex = Math.floor(Math.random() * images.length);
+    document.getElementById("randomImage").src = images[randomIndex];
+}, 3000);
+</script>
 
 </body>
 </html>
