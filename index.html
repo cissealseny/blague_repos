@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Surprise 😂</title>
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        img {
+            max-width: 90%;
+            border-radius: 20px;
+            box-shadow: 0 0 30px red;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 28px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <img id="randomImage" src="" alt="Surprise">
+    <h1>😂 GOT YOU 😂</h1>
+
+    <script>
+        const images = [
+            "images/photo1.jpg",
+            "images/photo2.jpg",
+            "images/photo3.jpg",
+            "images/photo4.jpg"
+        ];
+
+        const randomIndex = Math.floor(Math.random() * images.length);
+        document.getElementById("randomImage").src = images[randomIndex];
+    </script>
+
+</body>
+</html>
