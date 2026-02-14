@@ -2,14 +2,25 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Wi-Fi Gratuit</title>
+<title>💔 Spécial Saint-Valentin</title>
 
 <style>
-body {
+* {
     margin: 0;
-    background: black;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ÉCRAN DE CHARGEMENT */
+#loading {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,26 +29,6 @@ body {
     text-align: center;
 }
 
-#prank {
-    display: none;
-}
-
-img {
-    max-width: 90%;
-    border-radius: 20px;
-    box-shadow: 0 0 30px red;
-}
-
-h1 {
-    margin-top: 20px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    50% { opacity: 0; }
-}
-
-/* barre de chargement */
 .loader {
     width: 250px;
     height: 10px;
@@ -57,6 +48,168 @@ h1 {
 @keyframes load {
     to { width: 100%; }
 }
+
+/* SLIDES */
+#slides {
+    display: none;
+}
+
+.slide {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.slide:nth-child(odd) {
+    background: linear-gradient(135deg, #e94560, #ff6b6b);
+}
+
+.slide:nth-child(even) {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+}
+
+.slide img {
+    max-width: 85%;
+    max-height: 50vh;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+}
+
+.slide h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+}
+
+.slide .joke {
+    font-size: 1.4em;
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.slide .励志-quote {
+    font-size: 1.1em;
+    font-style: italic;
+    opacity: 0.9;
+    max-width: 500px;
+    border-left: 4px solid rgba(255,255,255,0.5);
+    padding-left: 20px;
+    margin: 20px 0;
+}
+
+.emoji-big {
+    font-size: 4em;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.heartbeat {
+    animation: heartbeat 1s infinite;
+    display: inline-block;
+}
+
+/* SCROLL INDICATOR */
+.scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.9em;
+    opacity: 0.7;
+    animation: fadeUpDown 2s infinite;
+}
+
+@keyframes fadeUpDown {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-10px); }
+}
+
+/* SLIDE FINALE */
+.final-slide {
+    background: linear-gradient(135deg, #ff9a9e, #fecfef, #fecfef, #ff9a9e);
+    color: #333;
+}
+
+.final-slide h1 {
+    color: #e94560;
+}
+
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+/* NAVIGATION DOTS */
+.nav-dots {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 100;
+}
+
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.nav-dot.active {
+    background: white;
+    transform: scale(1.3);
+}
+
+/* GOT YOU */
+.got-you {
+    font-size: 3em;
+    animation: blink 0.5s infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes blink {
+    50% { opacity: 0.3; }
+}
+
+@media (max-width: 600px) {
+    .slide h1 { font-size: 1.8em; }
+    .slide .joke { font-size: 1.1em; }
+    .emoji-big { font-size: 3em; }
+    .nav-dots { right: 10px; }
+}
 </style>
 </head>
 
@@ -71,27 +224,155 @@ h1 {
     </div>
 </div>
 
-<!-- ÉCRAN BLAGUE -->
-<div id="prank">
-    <img id="randomImage" src="">
-    <h1>😂 GOT YOU 😂</h1>
+<!-- NAVIGATION DOTS -->
+<div class="nav-dots" id="navDots"></div>
+
+<!-- SLIDES DE BLAGUES -->
+<div id="slides">
+    
+    <!-- SLIDE 1 - GOT YOU -->
+    <div class="slide">
+        <div class="got-you">😂 GOT YOU 😂</div>
+        <img id="randomImage" src="">
+        <h1>Pas de Wi-Fi... mais des blagues !</h1>
+        <p class="joke">Bienvenue dans ton cadeau de Saint-Valentin 💝</p>
+        <div class="scroll-hint">👇 Scroll pour continuer 👇</div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide">
+        <div class="emoji-big">💔</div>
+        <h1>Être célibataire à la Saint-Valentin...</h1>
+        <p class="joke">C'est comme avoir un abonnement Netflix gratuit : personne pour te voler la télécommande !</p>
+        <p class="励志-quote">💪 "Le courage, c'est de se lever chaque matin et de sourire même quand ton crush a liké la photo de quelqu'un d'autre."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide">
+        <div class="emoji-big">🍫</div>
+        <h1>Le 15 février...</h1>
+        <p class="joke">Les chocolats sont à -50% et tu n'as personne avec qui les partager. C'est pas un problème, c'est une VICTOIRE ! 🏆</p>
+        <p class="励志-quote">💪 "Un célibataire n'est pas quelqu'un qui n'a pas trouvé l'amour. C'est quelqu'un qui a des standards."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide">
+        <div class="emoji-big">📱</div>
+        <h1>Quand tu scrolles Instagram le 14 février...</h1>
+        <p class="joke">Et que tout le monde poste des photos de couple... Toi tu postes une photo de ta pizza. Et honnêtement ? La pizza ne t'a jamais déçu. 🍕❤️</p>
+        <p class="励志-quote">💪 "Continue d'avancer. L'amour te trouvera... probablement au moment où tu auras la bouche pleine de kebab."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide">
+        <div class="emoji-big">💑</div>
+        <h1>Les couples disent : "On se complète"</h1>
+        <p class="joke">Toi tu dis : "Je me suffit à moi-même... et à mon compte Netflix, Spotify, et mon frigo bien rempli." 😌</p>
+        <p class="励志-quote">💪 "La solitude n'est pas un défaut. C'est une salle d'attente VIP pour quelqu'un d'exceptionnel."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide">
+        <div class="emoji-big">💸</div>
+        <h1>Économies de la Saint-Valentin :</h1>
+        <p class="joke">Fleurs : 0€ | Restaurant : 0€ | Cadeau : 0€ | Ne pas partager ton lit : INESTIMABLE 💰</p>
+        <p class="励志-quote">💪 "Chaque jour célibataire est un jour de plus à investir en toi-même. Tu es ton meilleur placement !"</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide">
+        <div class="emoji-big">🛏️</div>
+        <h1>Avantages d'être célibataire :</h1>
+        <p class="joke">✅ Tout le lit pour toi<br>✅ La télécommande est TOUJOURS à toi<br>✅ Manger des chips à 3h du mat sans jugement<br>✅ Tes exs te regardent d'en bas 👀</p>
+        <p class="励志-quote">💪 "Tu n'es pas seul(e). Tu es disponible. Et ça, c'est une force."</p>
+        <div class="scroll-hint">👇</div>
+    </div>
+
+    <!-- SLIDE 8 - FINALE -->
+    <div class="slide final-slide">
+        <div class="emoji-big"><span class="heartbeat">❤️</span></div>
+        <h1>Message sérieux maintenant...</h1>
+        <p class="joke">Tu es incroyable tel(le) que tu es. L'amour viendra quand il viendra. En attendant, aime-toi toi-même, c'est le seul amour garanti à 100% ! 💖</p>
+        <p class="励志-quote">💪 "Le plus grand amour de ta vie, c'est toi. Les autres ne sont que des bonus."</p>
+        <br><br>
+        <h1 style="font-size: 1.5em;">Joyeuse Saint-Valentin ! 🎉</h1>
+        <p style="margin-top: 20px; opacity: 0.7;">— Avec amour, de la part de celui/celle qui t'a piégé(e) 😂</p>
+    </div>
+
 </div>
 
 <script>
+// Lancer après le chargement
 setTimeout(() => {
     document.getElementById("loading").style.display = "none";
-    document.getElementById("prank").style.display = "block";
+    document.getElementById("slides").style.display = "block";
 
+    // Image aléatoire
     const images = [
         "images/photo1.jpg",
         "images/photo2.jpg",
         "images/photo3.jpg",
         "images/photo4.jpg"
     ];
-
     const randomIndex = Math.floor(Math.random() * images.length);
     document.getElementById("randomImage").src = images[randomIndex];
+
+    // Créer les confettis
+    createConfetti();
+
+    // Navigation dots
+    createNavDots();
 }, 3000);
+
+// CONFETTI
+function createConfetti() {
+    const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 5000);
+        }, i * 100);
+    }
+}
+
+// NAV DOTS
+function createNavDots() {
+    const slides = document.querySelectorAll('.slide');
+    const navContainer = document.getElementById('navDots');
+    
+    slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (index === 0 ? ' active' : '');
+        dot.onclick = () => {
+            slides[index].scrollIntoView({ behavior: 'smooth' });
+        };
+        navContainer.appendChild(dot);
+    });
+
+    // Update active dot on scroll
+    window.addEventListener('scroll', () => {
+        const scrollPos = window.scrollY;
+        slides.forEach((slide, index) => {
+            const dots = document.querySelectorAll('.nav-dot');
+            if (scrollPos >= slide.offsetTop - window.innerHeight / 2) {
+                dots.forEach(d => d.classList.remove('active'));
+                dots[index].classList.add('active');
+            }
+        });
+    });
+}
 </script>
 
 </body>
